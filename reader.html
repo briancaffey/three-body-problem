@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="main.css">
+  <meta charset="utf-8">
+
+  <script>
+    const { createApp, ref } = Vue
+
+    function loadJSON(callback) {
+      fetch('data/books/dark_forest/book_data_parsed.json')
+        .then(response => response.json())
+        .then(data => callback(data))
+        .catch(error => console.error('Error loading JSON file:', error));
+    }
+
+    loadJSON(data => {
+      createApp({
+        setup() {
+          return {
+            data: data,
+          }
+        }
+      }).mount('#app')
+    })
+  </script>
+
+</head>
+<body class="bg-red">
+  <div id="app">
+    <div v-if="data" class="p-4">
+
+    {{ data.title }}
+    <h1>Chapters</h1>
+        <details v-for="chapter in data.chapters"><summary>{{ chapter.title}}</summary>
+            P# {{ chapter.paragraphs.length }}
+            <div v-if="chapter.parsed_paragraphs">
+                <div class="p-2" v-for="paragraph in chapter.parsed_paragraphs">
+                    <span class="hover:font-bold" v-for="token in paragraph" :title="token.definition">
+                        <span v-for="character in token.characters" :title="`
+Word: ${token.text} (${token.pinyin}) - ${token.definition}
+
+Character: ${character.character} (${character.pinyin}) ${character.definition}
+
+`"><span class="rounded" :style="`
+    background-color: color-mix(in srgb, white ${((1 - (character.overall_frequency*1.3))*100)}%, rgb(170, 56, 30));
+
+`">
+    {{ character.character }}
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </details>
+    </div>
+  </div>
+</body>
+<!-- rgba(4, 80, 150, ${1 - character.overall_frequency}); -->
