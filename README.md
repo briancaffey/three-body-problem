@@ -2,14 +2,16 @@
 
 - [x] scraping (downloading raw HTML)
 - [x] extracting (bs4)
-- [ ] text_to_json (converting flat text files to JSON files)
-- [ ] dictionary (build an offline Chinese dictionary with over 120K words)
+- [x] text_to_json (converting flat text files to JSON files)
+- [x] dictionary (build an offline Chinese dictionary with over 120K words)
     - Idioms dictionary
-- [ ] Top Chinese Characters
+- [x] Top Chinese Characters
     - Top 5000 rank
     - Top 1500 rank
-- [ ] spacy_parsing
+- [x] spacy_parsing
 
 # Vue
 
-- Vue sites
+- [x] Vue sites
+    - [x] Character frequency
+    - [x] Reader
