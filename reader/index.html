@@ -11,7 +11,7 @@
     const { createApp, ref } = Vue
 
     function loadJSON(callback) {
-      fetch('data/books/dark_forest/book_data_parsed.json')
+      fetch('../data/books/dark_forest/book_data_parsed.json')
         .then(response => response.json())
         .then(data => callback(data))
         .catch(error => console.error('Error loading JSON file:', error));
@@ -29,7 +29,7 @@
   </script>
 
 </head>
-<body class="bg-red">
+<body class="bg-red" style="background-color: darkslategrey;">
   <div id="app">
     <div v-if="data" class="p-4">
 
@@ -59,4 +59,3 @@ Character: ${character.character} (${character.pinyin}) ${character.definition}
     </div>
   </div>
 </body>
-<!-- rgba(4, 80, 150, ${1 - character.overall_frequency}); -->
