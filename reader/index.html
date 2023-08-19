@@ -52,7 +52,7 @@
     <div v-if="data" class="sm:p-32 md:p-16 p-4 text-2xl">
       <div class="text-center font-bold"><span>上&nbsp;&nbsp;&nbsp;</span>{{ data.title }}<span>&nbsp;&nbsp;&nbsp;下</span></div>
           <div v-if="data.parsed_paragraphs">
-            <div class="p-2" v-for="paragraph in data.parsed_paragraphs">
+            <div class="p-2" v-for="(paragraph, i) in data.parsed_paragraphs">
                 <span class="hover:font-bold text-gray" v-for="token in paragraph" :title="token.definition">
                     <span v-for="character in token.characters" :title="`
   Word: ${token.text} (${token.pinyin}) - ${token.definition}
@@ -67,6 +67,7 @@
                         </span>
                     </span>
                 </span>
+                <div>{{ data.translated_paragraphs[i] }}</div><br /><br />
             </div>
         </div>
     </div>
