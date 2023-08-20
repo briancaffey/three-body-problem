@@ -37,7 +37,25 @@
     loadJSON(data => {
       createApp({
         setup() {
+          const nextPage = (i) => {
+            console.log('here');
+
+            // Get the current URL
+            const url = new URL(window.location.href);
+
+            // Get the query parameters
+            const searchParams = url.searchParams;
+            console.log(searchParams);
+            const nextChapterNumber = parseInt(searchParams.get("chapterNumber"));
+
+            console.log(nextChapterNumber)
+
+            url.searchParams.set('chapterNumber', nextChapterNumber + i);
+            console.log(url.href);
+            window.location.href = url.href;
+          };
           return {
+            nextPage,
             data: data,
             paramsDictionary,
           }
@@ -49,25 +67,23 @@
 </head>
 <body class="" style="background-color: rgb(207, 187, 140);">
   <div id="app">
-    <div v-if="data" class="sm:p-32 md:p-16 p-4 text-2xl">
-      <div class="text-center font-bold"><span>上&nbsp;&nbsp;&nbsp;</span>{{ data.title }}<span>&nbsp;&nbsp;&nbsp;下</span></div>
+    <div v-if="data" class="p-4 text-2xl">
+      <div class="text-center font-bold pb-8"><span @click="nextPage(-1)" class="px-8 cursor-pointer">上</span><span v-html="data.title"></span><span @click="nextPage(1)" class="px-8 cursor-pointer">下</span></div>
           <div v-if="data.parsed_paragraphs">
-            <div class="p-2" v-for="(paragraph, i) in data.parsed_paragraphs">
-                <span class="hover:font-bold text-gray" v-for="token in paragraph" :title="token.definition">
+            <div class="p-4 grid md:grid-cols-2 grid-cols-1 gap-4" v-for="(paragraph, i) in data.parsed_paragraphs">
+                <div>
+
+                  <span class="hover:font-bold text-gray inline" v-for="token in paragraph" :title="token.definition">
                     <span v-for="character in token.characters" :title="`
-  Word: ${token.text} (${token.pinyin}) - ${token.definition}
+Word: ${token.text} (${token.pinyin}) - ${token.definition}
 
-  Character: ${character.character} (${character.pinyin}) ${character.definition}
-
-  `"><span class="rounded" :style="`
-  background-color: color-mix(in srgb, rgba(170, 56, 30, 0) ${((1 - (character.overall_frequency*1.3))*100)}%, rgb(170, 56, 30));
-
-  `">
-  {{ character.character }}
-                        </span>
+Character: ${character.character} (${character.pinyin}) ${character.definition}
+`"><span class="rounded" :style="`background-color: color-mix(in srgb, rgba(170, 56, 30, 0) ${((1 - (character.overall_frequency*1.3))*100)}%, rgb(170, 56, 30));`" v-html="character.character">
+                      </span>
                     </span>
-                </span>
-                <div>{{ data.translated_paragraphs[i] }}</div><br /><br />
+                  </span>
+                </div>
+                <div v-html="data.translated_paragraphs[i]"></div><br /><br />
             </div>
         </div>
     </div>
