@@ -1,5 +1,7 @@
 # Notebooks
 
+## 01_scraping.ipynb
+
 - [x] scraping (downloading raw HTML)
 - [x] extracting (bs4)
 - [x] text_to_json (converting flat text files to JSON files)
@@ -9,6 +11,10 @@
     - Top 5000 rank
     - Top 1500 rank
 - [x] spacy_parsing
+
+# CUPY
+
+
 
 # Vue
 
