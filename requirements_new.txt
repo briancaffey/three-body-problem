@@ -1,0 +1,6 @@
+chromadb
+jupyter
+langchain
+llama-cpp-python
+matplotlib
+numpy
