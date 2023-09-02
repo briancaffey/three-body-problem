@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array of Rectangular Cubes</title>
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js'; // Make sure to use the correct version
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        camera.position.set(0, 0, 10);
+        camera.lookAt(0, 0, 0);
+
+        const cubesData = [
+            { color: 0xff0000, height: 1 },
+            { color: 0x00ff00, height: 2 },
+            { color: 0x0000ff, height: 3 }
+        ];
+
+        cubesData.forEach((cubeData, index) => {
+            const geometry = new THREE.BoxGeometry(1, 1, cubeData.height);
+            const material = new THREE.MeshBasicMaterial({ color: cubeData.color });
+            const cube = new THREE.Mesh(geometry, material);
+
+            cube.position.x = (index - 1) * 2.5; // Arrange cubes in a row
+            scene.add(cube);
+        });
+
+        renderer.render(scene, camera);
+    </script>
+</head>
+<body>
+</body>
+</html>
