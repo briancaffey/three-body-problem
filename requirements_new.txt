@@ -4,3 +4,13 @@ langchain
 llama-cpp-python
 matplotlib
 numpy
+
+# TODO: add dependencies for NLP, bs4, etc from requirements.txt
+
+# required for QWEN 7B demo
+transformers==4.31.0
+accelerate
+tiktoken
+einops
+transformers_stream_generator==0.0.4
+scipy
