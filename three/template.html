@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>three.js webgl - template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <div id="info">
+      <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - <span id="protoplanets"></span> webgl gpgpu debris
+    </div>
+
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.149.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+
+      import * as THREE from 'three';
+
+      import Stats from 'three/addons/libs/stats.module.js';
+      import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+
+      import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+      import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer.js';
+
+
+
+
+      let container, stats;
+      let camera, scene, renderer, geometry;
+
+      let effectController;
+
+      init();
+      animate();
+
+      function init() {
+
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 5, 15000 );
+        camera.position.y = 120;
+        camera.position.z = 400;
+
+        scene = new THREE.Scene();
+
+        scene.background = new THREE.Color( 0xffffff );
+
+        // new cube
+        const color = new THREE.Color( 0xefefef );
+		const material = new THREE.MeshPhongMaterial({ color: color, specular: 0x111111, emissive: 0x000000 });
+		// const cubeColor = 'sdf';
+
+        const geometry = new THREE.BoxGeometry(100, 100, 100);
+
+        // create mesh
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add( cube );
+
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
+
+        const controls = new OrbitControls( camera, renderer.domElement );
+        controls.minDistance = 100;
+        controls.maxDistance = 1000;
+
+        stats = new Stats();
+        container.appendChild( stats.dom );
+
+        window.addEventListener( 'resize', onWindowResize );
+
+        initGUI();
+        dynamicValuesChanger();
+
+      }
+
+
+      function restartSimulation() {
+      }
+
+
+
+
+      function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+
+      }
+
+      function dynamicValuesChanger() {
+
+        console.log("update dynamic values")
+
+      }
+
+      function initGUI() {
+
+        const gui = new GUI( { width: 280 } );
+
+        const folder1 = gui.addFolder( 'Folder 1' );
+
+        const folder2 = gui.addFolder( 'Folder 2' );
+
+        const buttonRestart = {
+          triggerSomething: function () {
+
+            console.log('Trigger something');
+
+          }
+        };
+
+        folder2.add( buttonRestart, 'triggerSomething' );
+
+        folder1.open();
+        folder2.open();
+
+      }
+
+
+
+      function animate() {
+
+        requestAnimationFrame( animate );
+
+        render();
+        stats.update();
+
+      }
+
+      function render() {
+
+        renderer.render( scene, camera );
+
+      }
+
+    </script>
+  </body>
+</html>
