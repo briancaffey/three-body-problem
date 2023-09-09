@@ -95,6 +95,7 @@
             }
 
             async function init() {
+                loadFont();
                 const cubesData = await loadCubesData();
 
                 container = document.createElement( 'div' );
@@ -246,7 +247,7 @@
             async function loadFont() {
 
                 const loader = new FontLoader();
-                await loader.load('tinghei_regular.typeface.json',
+                loader.load('tinghei_regular.typeface.json',
                     function ( response ) {
                         font = response;
                         console.log("finished loading font...");
