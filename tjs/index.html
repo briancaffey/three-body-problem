@@ -242,12 +242,21 @@
             }
 
 
-            function loadFont() {
+            async function loadFont() {
 
                 const loader = new FontLoader();
-                loader.load( 'tinghei_regular.typeface.json', function ( response ) {
-                    font = response;
-                } );
+                await loader.load('tinghei_regular.typeface.json',
+                    function ( response ) {
+                        font = response;
+                    } ,
+                    function ( xhr ) {
+                        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+                    },
+                    // onError callback
+                    function ( err ) {
+                        console.log( 'An error happened' );
+                    }
+                );
             }
 
             function animate() {
@@ -283,7 +292,7 @@
             }
             window.addEventListener( 'pointermove', onPointerMove );
 
-            init();
+            await init();
 
         </script>
 
