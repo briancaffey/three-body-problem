@@ -38,7 +38,7 @@
 
             import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
-            THREE.Cache.enabled = true;
+            // THREE.Cache.enabled = true;
 
             let container;
             let stats;
@@ -87,6 +87,7 @@
                 try {
                     const response = await fetch('output.json');
                     const cubesData = await response.json();
+                    console.log("finished loading cube data...")
                     return cubesData;
                 } catch (error) {
                     console.error('Error loading cubesData:', error);
@@ -248,6 +249,7 @@
                 await loader.load('tinghei_regular.typeface.json',
                     function ( response ) {
                         font = response;
+                        console.log("finished loading font...");
                     } ,
                     function ( xhr ) {
                         console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
