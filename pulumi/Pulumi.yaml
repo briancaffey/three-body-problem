@@ -1,0 +1,6 @@
+name: aws-sagemaker-huggingface-llm-inference
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: A Python program to deploy a Huggingface LLM model to Amazon SageMaker with CloudWatch monitoring
