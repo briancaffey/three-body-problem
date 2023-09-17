@@ -95,7 +95,7 @@
             }
 
             async function init() {
-                loadFont();
+                // loadFont();
                 const cubesData = await loadCubesData();
 
                 container = document.createElement( 'div' );
@@ -251,6 +251,8 @@
                     function ( response ) {
                         font = response;
                         console.log("finished loading font...");
+                        // init();
+
                     } ,
                     function ( xhr ) {
                         console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
