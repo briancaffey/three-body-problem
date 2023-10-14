@@ -83,7 +83,10 @@ Character: ${character.character} (${character.pinyin}) ${character.definition}
                     </span>
                   </span>
                 </div>
-                <div v-html="data.translated_paragraphs[i]"></div><br /><br />
+                <div v-html="data?.translated_paragraphs[i]"></div><br /><br />
+                <div v-html="data?.en_translation_baichuan2_7b[i]"></div><br /><br />
+                <div v-html="data?.cn_summaries_baichuan2_7b[i]"></div><br /><br />
+                <div v-html="data?.en_summaries_baichuan2_7b[i]"></div><br /><br />
             </div>
         </div>
     </div>
