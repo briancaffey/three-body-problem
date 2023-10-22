@@ -70,6 +70,8 @@
     <div v-if="data" class="p-4 text-2xl">
       <div class="text-center font-bold pb-8"><span @click="nextPage(-1)" class="px-8 cursor-pointer">上</span><span v-html="data.title"></span><span @click="nextPage(1)" class="px-8 cursor-pointer">下</span></div>
           <div v-if="data.parsed_paragraphs">
+            <!-- <div>original text: {{ data?.paragraphs?.length || '-' }}</div>
+            <div>translations: {{ data?.en_translation_baichuan2_7b?.length || '-' }}</div> -->
             <div class="p-4 grid md:grid-cols-2 grid-cols-1 gap-4" v-for="(paragraph, i) in data.parsed_paragraphs">
                 <div>
 
@@ -83,10 +85,15 @@ Character: ${character.character} (${character.pinyin}) ${character.definition}
                     </span>
                   </span>
                 </div>
-                <div v-html="data?.translated_paragraphs[i]"></div><br /><br />
-                <div v-html="data?.en_translation_baichuan2_7b[i]"></div><br /><br />
+                <!-- <div v-html="data?.translated_paragraphs[i]"></div><br /><br /> -->
+                <!-- <div v-html="data?.en_translation_baichuan2_7b[i]"></div><br /><br />
                 <div v-html="data?.cn_summaries_baichuan2_7b[i]"></div><br /><br />
-                <div v-html="data?.en_summaries_baichuan2_7b[i]"></div><br /><br />
+                <div v-html="data?.en_summaries_baichuan2_7b[i]"></div><br /><br /> -->
+
+
+                <div v-html="data?.en_translation_qwen_7b_chat[i]"></div><br /><br />
+                <div v-html="data?.cn_summaries_qwen_7b_chat[i]"></div><br /><br />
+                <div v-html="data?.en_summaries_qwen_7b_chat[i]"></div><br /><br />
             </div>
         </div>
     </div>

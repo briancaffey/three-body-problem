@@ -19,3 +19,6 @@ scipy
 bitsandbytes
 sentencepiece>=0.1.82
 xformers
+
+# openai
+openai
