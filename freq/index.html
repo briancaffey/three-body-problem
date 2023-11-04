@@ -11,7 +11,7 @@
     const { createApp, ref } = Vue
 
     function loadJSON(callback) {
-      fetch('../output.json')
+      fetch('../data/language/counts.json')
         .then(response => response.json())
         .then(data => callback(data))
         .catch(error => console.error('Error loading JSON file:', error));
@@ -54,18 +54,19 @@
               left:0;
               width:100%;
               height:100%;
-              background-color:${character.overall_rank === -1 ? 'black':'blue'};
-              opacity:${100 * (character.overall_rank === -1 ? 3000 : character.overall_rank)/4000}%;
+              background-color:${character[2] === -1 ? 'black':'blue'};
+              opacity:${100 * (character[2] === -1 ? 3000 : character[2])/4000}%;
               z-index:100;`
             "
             :title="`
-Book Rank: ${character.rank}
-Overall Rank: ${character.overall_rank}
-Occurences: ${character.occurences}
-English: ${character.english}
+Book Rank: ${index}
+Overall Rank: ${character[2]}
+Occurences: ${character[1]}
+English: ${character[3]}
+Pinyin: ${character[4]}
 `"
-          >{{ character.character }}</div>
-          <div style="z-index: 1000;" class="p-2 text-white" title="testing">{{ character.character }}</div>
+          >{{ character[0] }}</div>
+          <div style="z-index: 1000;" class="p-2 text-white" title="testing">{{ character[0] }}</div>
         </div>
       </div>
     </div>

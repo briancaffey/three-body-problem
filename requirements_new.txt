@@ -16,9 +16,12 @@ transformers_stream_generator==0.0.4
 scipy
 
 # required for baichuan2-7B-chat
-bitsandbytes
-sentencepiece>=0.1.82
-xformers
+# bitsandbytes
+# sentencepiece>=0.1.82
+# xformers
 
 # openai
 openai
+
+# required for parsing and character statistics
+spacy==3.6.0
