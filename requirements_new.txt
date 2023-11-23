@@ -25,3 +25,9 @@ openai
 
 # required for parsing and character statistics
 spacy==3.6.0
+
+pulumi
+
+# for gif
+ffmpeg-python
+pillow

@@ -26,7 +26,7 @@ llm = HuggingFaceLlm(
     'Llama2Llm',  # Custom name for the LLM model
     instance_type='ml.g5.2xlarge',  # AWS instance type for SageMaker deployment
     environment_variables={
-        'HF_MODEL_ID': 'NousResearch/Llama-2-7b-chat-hf',  # HuggingFace model ID
+        'HF_MODEL_ID': '01-ai/Yi-34B',  # HuggingFace model ID
         'SM_NUM_GPUS': '1',  # Number of GPUs to use
         'MAX_INPUT_LENGTH': '2048',  # Maximum input length for the model
         'MAX_TOTAL_TOKENS': '4096',  # Maximum number of tokens

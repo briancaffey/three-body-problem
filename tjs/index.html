@@ -8,10 +8,6 @@
     </head>
     <body>
 
-        <div id="info" style="color: blue;">
-            Character Frequency
-        </div>
-
         <!-- Import maps polyfill -->
         <!-- Remove this when import maps will be widely supported -->
         <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
@@ -102,7 +98,7 @@
 
             async function loadCubesData() {
                 try {
-                    const response = await fetch('../data/language/counts_9.json');
+                    const response = await fetch('../data/language/counts.json');
                     const cubesData = await response.json();
                     console.log("finished loading cube data...")
                     return cubesData;
@@ -125,14 +121,15 @@
 
                 camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 100000 );
                 // const camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 1, 1000 );
-                camera.position.set( 0, 400, 700 );
+                camera.position.set( 2087, 1184, 1324 );
+                camera.lookAt(new THREE.Vector3(1,100,100))
 
                 cameraTarget = new THREE.Vector3( 0, 150, 0 );
 
                 // SCENE
 
                 scene = new THREE.Scene();
-                scene.background = new THREE.Color( 'olivedrab' );
+                scene.background = new THREE.Color( 0x091a28 );
                 // scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
 
                 // LIGHTS
@@ -152,18 +149,6 @@
                 ambientLight.castShadow = true;
                 // scene.add( ambientLight );
 
-                // // scene.add( new THREE.AmbientLight( 0xf0f0f0, 3 ) );
-                // const light = new THREE.SpotLight( 0xffffff, 10 );
-                // light.position.set( 10000, 10000, 1500 );
-                // light.angle = Math.PI * 0.2;
-                // light.decay = 0;
-                // light.castShadow = true;
-                // light.shadow.camera.near = 20;
-                // light.shadow.camera.far = 200000;
-                // light.shadow.bias = - 0.000222;
-                // light.shadow.mapSize.width = 1024;
-                // light.shadow.mapSize.height = 1024;
-                // scene.add( light );
 
                 materials = [
                     new THREE.MeshStandardMaterial( { color: 0xffafff, flatShading: true, emissive: 0xffaabb } ), // front
@@ -172,7 +157,8 @@
 
                 // RENDERER
 
-                renderer = new THREE.WebGLRenderer( { antialias: true } );
+                renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+                renderer.setClearColor( 0x000000, .5 ); // the default
                 renderer.setPixelRatio( window.devicePixelRatio );
 
                 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -186,12 +172,12 @@
                 controls.maxDistance = 100000;
 
                 // rows
-                // const n = 100;
-                const n = 3;
+                const n = 100;
+                // const n = 3;
 
                 // cols
-                // const m = 30;
-                const m = 3;
+                const m = 30;
+                // const m = 3;
 
 
                 cubesData.slice(0,n*m).forEach((cubeData, index) => {
@@ -207,12 +193,12 @@
                     const cubePinyin = cubeData[4];
 
                     // cube colors
-                    const colorA = new THREE.Color( "Chocolate" );
-                    const colorB = new THREE.Color( "green" );
+                    const colorA = new THREE.Color( "seagreen" );
+                    const colorB = new THREE.Color( "black" );
 
                     // text colors
-                    const colorC = new THREE.Color( "aqua" );
-                    const colorD = new THREE.Color( "Tomato" );
+                    const colorC = new THREE.Color( "crimson" );
+                    const colorD = new THREE.Color( "white" );
 
                     // get material color
                     const cubeColor = interpolateColor(colorA, colorB, cubeOverallRank / 5000);
@@ -279,13 +265,13 @@
 
                 gui.open();
 
-                const colorsFolder = gui.addFolder('Colors');
+                // const colorsFolder = gui.addFolder('Colors');
 
-                colorsFolder.addColor(materialColors, 'cubeA').listen();
-                colorsFolder.addColor(materialColors, 'cubeB').listen();
-                colorsFolder.addColor(materialColors, 'textA').listen();
-                colorsFolder.addColor(materialColors, 'textB').listen();
-                colorsFolder.open();
+                // colorsFolder.addColor(materialColors, 'cubeA').listen();
+                // colorsFolder.addColor(materialColors, 'cubeB').listen();
+                // colorsFolder.addColor(materialColors, 'textA').listen();
+                // colorsFolder.addColor(materialColors, 'textB').listen();
+                // colorsFolder.open();
 
                 window.addEventListener('resize', onWindowResize);
 
